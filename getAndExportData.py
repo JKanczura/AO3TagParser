@@ -42,6 +42,7 @@ class getAndExportData:
         return tags
 
     def incrementPage(self, url):
+        #check if page is already in the url
         if "page=" in url:
             prevPage = url[(len(url)-1)]
             prevPage = int(prevPage)
@@ -49,10 +50,11 @@ class getAndExportData:
 
             url = url[:-1]
             url = url + str(prevPage)
-
-            return url
-
-        return True
+        #if page is not in the url, automatically assume it's on page 1
+        else:
+            url = url + "?page=2"
+        #return the modified url
+        return url
 
 
 
