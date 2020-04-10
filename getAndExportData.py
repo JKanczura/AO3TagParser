@@ -56,6 +56,9 @@ class getAndExportData:
         #return the modified url
         return url
 
+    def doesPageContainFics(self, url):
+        return True
+
 
 
         
