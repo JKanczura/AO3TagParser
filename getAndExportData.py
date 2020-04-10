@@ -41,7 +41,17 @@ class getAndExportData:
                 
         return tags
 
-    def incrementPage(self, prevUrl):
+    def incrementPage(self, url):
+        if "page=" in url:
+            prevPage = url[(len(url)-1)]
+            prevPage = int(prevPage)
+            prevPage = prevPage + 1
+
+            url = url[:-1]
+            url = url + str(prevPage)
+
+            return url
+
         return True
 
 
@@ -52,4 +62,5 @@ class getAndExportData:
 
 #Call methods...for the purpose of testing
 test = getAndExportData("Villaneve")
-test.pullTagsFromPage("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works", {})
+test.incrementPage("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works?page=2")
+#test.pullTagsFromPage("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works", {})
