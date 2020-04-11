@@ -57,7 +57,21 @@ class getAndExportData:
         return url
 
     def doesPageContainFics(self, url):
-        return True
+         #get raw HTML from provided URL
+        r = requests.get(url)
+        #convert raw html to String
+        pageHTML = r.text
+
+        #create soup from whole page
+        soup = BeautifulSoup(pageHTML, "html.parser")
+
+        #only exists on pages that have fics
+        blurbs = soup.find_all("li", "work blurb group")
+        
+        if len(blurbs) == 0:
+            return False
+        else:
+            return True
 
 
 
@@ -67,5 +81,5 @@ class getAndExportData:
 
 #Call methods...for the purpose of testing
 test = getAndExportData("Villaneve")
-test.incrementPage("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works?page=2")
+print(test.doesPageContainFics("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works?page=47"))
 #test.pullTagsFromPage("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works", {})
