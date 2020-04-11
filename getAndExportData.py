@@ -74,11 +74,6 @@ class getAndExportData:
             return True
 
 
-
-        
-        
-        
-
 #Call methods...for the purpose of testing
 test = getAndExportData("Villaneve")
 print(test.doesPageContainFics("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works?page=47"))
