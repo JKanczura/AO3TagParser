@@ -1,13 +1,15 @@
 from bs4 import BeautifulSoup
 import requests
+import datetime
 
 class getAndExportData:
 
     def __init__(self, ship):
+        print(datetime.datetime.now())
         self.ship = ship
 
     def pullTagsFromPage(self, url, tags):
-
+        print(datetime.datetime.now())
         #get raw HTML from provided URL
         r = requests.get(url)
         #convert raw html to String
@@ -16,11 +18,15 @@ class getAndExportData:
         #create soup from whole page
         soup = BeautifulSoup(pageHTML, "html.parser")
 
+        print("Created soup.")
         #creates list of all tags, separated by each work
         allTags = soup.find_all("ul", "tags commas")
 
+        print("Found all tags")
+
         #iterate through all tags to find the ones we want
         #this goes fic by fic on the page
+        print("Iterate through tags for each story")
         for i in allTags:
             #separate out "freeforms" aka custom tags
             temp = i.find_all("li", "freeforms")
@@ -38,10 +44,11 @@ class getAndExportData:
                 else: 
                     #create new key value pair for this tag
                     tags[tagVal] = 1
-                
+        print("Tags all found")
         return tags
 
     def incrementPage(self, url):
+        print(datetime.datetime.now())
         #check if page is already in the url
         if "page=" in url:
             prevPage = url[(len(url)-1)]
@@ -57,14 +64,16 @@ class getAndExportData:
         return url
 
     def doesPageContainFics(self, url):
+        print(datetime.datetime.now())
          #get raw HTML from provided URL
         r = requests.get(url)
         #convert raw html to String
         pageHTML = r.text
-
+        print("Creating soup for contain fics")
         #create soup from whole page
         soup = BeautifulSoup(pageHTML, "html.parser")
 
+        print("Find if page exists")
         #only exists on pages that have fics
         blurbs = soup.find_all("li", "work blurb group")
         
@@ -74,7 +83,3 @@ class getAndExportData:
             return True
 
 
-#Call methods...for the purpose of testing
-test = getAndExportData("Villaneve")
-print(test.doesPageContainFics("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works?page=47"))
-#test.pullTagsFromPage("https://archiveofourown.org/tags/Eve%20Polastri*s*Villanelle%20%7C%20Oksana%20Astankova/works", {})
