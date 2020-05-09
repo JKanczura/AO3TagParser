@@ -19,6 +19,8 @@ class runStatisticsOnTagging:
         book = xl.Workbook()
         mainSheet = book.add_sheet("sheet1", cell_overwrite_ok=True)
 
+        #TODO: debug why the first value is one that appears once
+        #Rest are in order???
         for i, e in enumerate(keyList):
             mainSheet.write(i, 0, keyList[i-1])
             mainSheet.write(i, 1, valueList[i-1])
