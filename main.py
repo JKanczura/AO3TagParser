@@ -16,7 +16,8 @@ def main(url):
 
     stats = runStatisticsOnTagging()
 
-    stats.topTenPie(stats.sortedKeyList(tags), stats.sortedValueList(tags))
+    #stats.topTenPie(stats.sortedKeyList(tags), stats.sortedValueList(tags))
+    stats.exportTagsXlsx(stats.sortedKeyList(tags), stats.sortedValueList(tags))
 
 if __name__ == "__main__":
     main(sys.argv[1])

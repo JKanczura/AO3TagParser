@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import xlwt as xl
+# import TemporaryFile
 
 class runStatisticsOnTagging:
 
@@ -12,6 +14,17 @@ class runStatisticsOnTagging:
         plt.pie(valueList[0:9], labels=keyList[0:9],
            autopct=None)
         plt.show()
+
+    def exportTagsXlsx(self, keyList, valueList):
+        book = xl.Workbook()
+        mainSheet = book.add_sheet("sheet1", cell_overwrite_ok=True)
+
+        for i, e in enumerate(keyList):
+            mainSheet.write(i, 1, keyList[i-1])
+            mainSheet.write(i, 1, valueList[i-1])
+
+        book.save("villaneveStats.xls")
+        # book.save(TemporaryFile())
 
         
 
