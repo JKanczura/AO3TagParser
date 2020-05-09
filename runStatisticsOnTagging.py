@@ -20,7 +20,7 @@ class runStatisticsOnTagging:
         mainSheet = book.add_sheet("sheet1", cell_overwrite_ok=True)
 
         for i, e in enumerate(keyList):
-            mainSheet.write(i, 1, keyList[i-1])
+            mainSheet.write(i, 0, keyList[i-1])
             mainSheet.write(i, 1, valueList[i-1])
 
         book.save("villaneveStats.xls")
