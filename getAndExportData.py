@@ -8,17 +8,36 @@ class getAndExportData:
         print(datetime.datetime.now())
         self.ship = ship
 
-    def pullTagsFromPage(self, url, tags):
-        print(datetime.datetime.now())
+    #create soup from url
+    #since there are now multiple parsing functions
+    #makes sense to reuse this
+    def createSoup(self, url):
+        print("Creating soup: " + datetime.datetime.now())
+
         #get raw HTML from provided URL
         r = requests.get(url)
+
         #convert raw html to String
         pageHTML = r.text
 
         #create soup from whole page
         soup = BeautifulSoup(pageHTML, "html.parser")
+        print("Created soup: " + datetime.datetime.now())
 
-        print("Created soup.")
+        return soup 
+
+    #pull data for each story in this category
+    def pullAllStoryDataFromPage(self, url, existing_data):
+        print("Getting data from page: " + datetime.datetime.now())
+
+        soup = self.createSoup(url)
+
+
+    def pullTagsFromPage(self, url, tags):
+        print("Getting tags from page: " + datetime.datetime.now())
+
+        soup = self.createSoup(url)
+
         #creates list of all tags, separated by each work
         allTags = soup.find_all("ul", "tags commas")
 
@@ -46,6 +65,8 @@ class getAndExportData:
                     tags[tagVal] = 1
         print("Tags all found")
         return tags
+
+    
 
     def incrementPage(self, url):
         print(datetime.datetime.now())
