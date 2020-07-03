@@ -31,6 +31,20 @@ class getAndExportData:
         print("Getting data from page: " + datetime.datetime.now())
 
         soup = self.createSoup(url)
+        
+        #list of all stats
+        allStats = soup.find_all("dl", "stats")
+
+        print("Found all stats")
+        #iterate through all the stats to pull out the info we want
+        #we will be pulling:
+        #words, chapters, kudos, and hits
+
+        print("Iterate through all the stats")
+
+        for fic in allStats:
+            
+
 
 
     def pullTagsFromPage(self, url, tags):
